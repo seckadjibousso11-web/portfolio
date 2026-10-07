@@ -1,36 +1,40 @@
 /* ===== FICHIER À COMPLÉTER : toutes vos informations sont ici ===== */
 const PROFILE={
-  prenom:"Prénom", nom:"NOM", titre:"Étudiant BTS SIO option SISR",
-  session:"2026",
-  accroche:"Passionné par les systèmes, les réseaux et la cybersécurité. À compléter.",
+  prenom:"Adji Bousso", nom:"SECK", titre:"Étudiante BTS SIO SISR",
+  statut:"Formation initiale · ITIC Paris",
+  session:"2026-2027",
+  accroche:"Étudiante en BTS SIO option SISR à l'ITIC Paris, je me forme à l'administration des systèmes et des réseaux et à la sécurisation des infrastructures.",
   apropos:[
-    "Présentez-vous en 2 ou 3 phrases : qui vous êtes, d'où vient votre intérêt pour l'informatique. (À compléter)",
-    "Parlez de votre formation et de votre alternance ou stage. (À compléter)",
-    "Indiquez votre objectif : poursuite d'études ou emploi. (À compléter)"
+    "Je m'appelle Adji Bousso, je suis étudiante en <b>BTS Services Informatiques aux Organisations</b>, option <b>SISR</b>, à l'<b>ITIC Paris</b>, en formation initiale.",
+    "L'informatique m'attire pour une raison simple : j'aime comprendre comment les choses fonctionnent et trouver des solutions quand ça ne marche pas. Ce que je préfère, ce sont les <b>systèmes et les réseaux</b>.",
+    "Pendant ma formation, je réalise des projets concrets : installer des serveurs, configurer des réseaux, gérer des utilisateurs et sécuriser l'ensemble. C'est ce qui me permet de passer de la théorie à la pratique.",
+    "Je prépare mon diplôme pour la session <b>2026-2027</b> et je m'intéresse particulièrement à la <b>cybersécurité</b>, que j'aimerais approfondir ensuite."
   ],
-  ville:"Ville, France", email:"email@exemple.fr",
+  ville:"Paris, France", langues:"FR", email:"boussoseckadji6@gmail.com",
   linkedin:"https://www.linkedin.com/",
   github:"https://github.com/seckadjibousso11-web",
   cv:"pdf/cv.pdf"
 };
-const STACK={
-  "Systèmes":["Windows Server","Active Directory","Debian"],
-  "Réseau":["pfSense","VLAN","VPN"],
-  "Virtualisation":["Proxmox","Hyper-V"],
-  "Supervision et gestion":["Zabbix","GLPI"],
-  "Scripts":["PowerShell","Bash"]
-};
+/* Cartes de compétences : "fait" = ce que VOUS avez réalisé (à compléter) */
+const COMPETENCES=[
+  {icone:"🧩",nom:"Virtualisation",desc:"Faire tourner plusieurs machines virtuelles sur un même ordinateur pour tester des serveurs et des réseaux sans risque.",fait:"À compléter (outil utilisé, projet)."},
+  {icone:"👥",nom:"Active Directory",desc:"L'annuaire de Microsoft : il centralise les utilisateurs, les groupes, les ordinateurs et leurs droits d'accès.",fait:"À compléter."},
+  {icone:"🌐",nom:"TCP/IP & Réseaux",desc:"Adressage IP, sous-réseaux, VLAN, routage, DNS et DHCP : les bases pour faire communiquer des machines.",fait:"À compléter."},
+  {icone:"🪟",nom:"Windows Server",desc:"Le système serveur de Microsoft, utilisé pour installer des rôles et des services (AD, DNS, DHCP, partages).",fait:"À compléter."},
+  {icone:"🐧",nom:"Linux (Debian/Ubuntu)",desc:"Système très utilisé sur les serveurs : ligne de commande, services, gestion des droits.",fait:"À compléter."},
+  {icone:"💻",nom:"VS Code & Scripting",desc:"Automatiser des tâches répétitives avec des scripts (PowerShell, Bash) écrits dans VS Code.",fait:"À compléter."}
+];
 const PARCOURS={
   formation:[
-    {date:"2024 – 2026",titre:"BTS SIO option SISR",lieu:"Établissement, ville",desc:"Solutions d'infrastructure, systèmes et réseaux. (À compléter)"},
+    {date:"À compléter",titre:"BTS SIO option SISR",lieu:"ITIC Paris",desc:"Solutions d'infrastructure, systèmes et réseaux. Formation initiale."},
     {date:"Année",titre:"Baccalauréat (série)",lieu:"Lycée, ville",desc:"À compléter"}
   ],
   experiences:[
-    {id:"alternance",date:"Date début – en cours",titre:"Alternance",lieu:"Nom de l'entreprise",desc:"Missions principales. (À compléter)"},
-    {id:"stage",date:"Date début – date fin",titre:"Stage",lieu:"Nom de l'entreprise",desc:"À compléter"}
+    {id:"stage",date:"Date début – date fin",titre:"Stage 1",lieu:"Nom de l'entreprise",desc:"Missions principales. (À compléter)"},
+    {id:"stage",date:"Date début – date fin",titre:"Stage 2",lieu:"Nom de l'entreprise",desc:"À compléter"}
   ]
 };
-/* categorie : "alternance" | "stage" | "formation"  — image : captures à déposer dans assets/projects/ */
+/* categorie : "stage" | "formation"  — image : captures à déposer dans assets/projects/ */
 const PROJETS=[
   {id:"projet1",titre:"Titre du projet 1",categorie:"formation",date:"2025",
    resume:"Une phrase qui résume le projet. (À compléter)",
@@ -41,7 +45,7 @@ const PROJETS=[
    image:"assets/projects/projet1.png",
    captures:[],
    documents:[]},
-  {id:"projet2",titre:"Titre du projet 2",categorie:"alternance",date:"2025",
+  {id:"projet2",titre:"Titre du projet 2",categorie:"stage",date:"2025",
    resume:"À compléter",contexte:"À compléter",technos:["pfSense"],missions:["À compléter"],
    competences:[],image:"assets/projects/projet2.png",captures:[],documents:[]}
 ];

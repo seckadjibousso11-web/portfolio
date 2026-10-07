@@ -15,7 +15,12 @@ if(page==="home"){
  $("#h-name").textContent=full; $("#h-title").textContent=PROFILE.titre; $("#h-text").textContent=PROFILE.accroche;
  $("#cv-btn").href=PROFILE.cv; $("#gh-btn").href=PROFILE.github;
  $("#about-txt").innerHTML=PROFILE.apropos.map(p=>`<p>${p}</p>`).join("");
- $("#stack").innerHTML=Object.entries(STACK).map(([k,v])=>`<div class="card"><h3>${k}</h3>${tags(v)}</div>`).join("");
+ $("#avatar").textContent=PROFILE.prenom[0]; $("#a-name").textContent=full; $("#a-role").textContent=PROFILE.titre; $("#a-status").textContent=PROFILE.statut;
+ $("#cv-btn2").href=PROFILE.cv; $("#chips").innerHTML=`<span class="chip">📍 ${PROFILE.ville}</span><span class="chip">🗣 ${PROFILE.langues}</span>`;
+ document.body.insertAdjacentHTML("beforeend",'<div id="modal"><div class="box"></div></div>');
+ $("#skills").innerHTML=COMPETENCES.map((c,i)=>`<button class="skill" data-i="${i}"><span class="ic">${c.icone}</span>${c.nom}<small>En savoir plus →</small></button>`).join("");
+ document.querySelectorAll(".skill").forEach(b=>b.onclick=()=>{const c=COMPETENCES[b.dataset.i];$("#modal .box").innerHTML=`<button aria-label="Fermer">×</button><h3>${c.icone} ${c.nom}</h3><p>${c.desc}</p><p><b>Ce que j'ai fait :</b> ${c.fait}</p>`;$("#modal").classList.add("open");$("#modal button").onclick=()=>$("#modal").classList.remove("open")});
+ $("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("open")};
  $("#formation").innerHTML=PARCOURS.formation.map(f=>`<div class="it"><div class="meta">${f.date} · ${f.lieu}</div><h3>${f.titre}</h3><p>${f.desc}</p></div>`).join("");
  $("#experiences").innerHTML=PARCOURS.experiences.map(e=>`<div class="it"><div class="meta">${e.date} · ${e.lieu}</div><h3>${e.titre}</h3><p>${e.desc}</p><a href="projects.html#${e.id}">Voir les missions</a></div>`).join("");
  $("#contact-card").innerHTML=`<p>Courriel : <a href="mailto:${PROFILE.email}">${PROFILE.email}</a></p><p>Ville : ${PROFILE.ville}</p><p><a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a> · <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a></p>`;
