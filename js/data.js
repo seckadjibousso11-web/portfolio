@@ -26,8 +26,9 @@ const COMPETENCES=[
 ];
 const PARCOURS={
   formation:[
-    {date:"À compléter",titre:"BTS SIO option SISR",lieu:"ITIC Paris",desc:"Solutions d'infrastructure, systèmes et réseaux. Formation initiale."},
-    {date:"Année",titre:"Baccalauréat (série)",lieu:"Lycée, ville",desc:"À compléter"}
+    {date:"2025 — 2027 · En cours",titre:"BTS SIO option SISR",lieu:"ITIC Paris, France",desc:"Solutions d'Infrastructure, Systèmes et Réseaux. Spécialisation en administration systèmes sécurisés et architecture réseau.",now:true},
+    {date:"2024 — 2025",titre:"Licence professionnelle en industrie",lieu:"Dakar, Sénégal",desc:"Licence professionnelle dans le domaine de l'industrie."},
+    {date:"2023 — 2024",titre:"Baccalauréat scientifique",lieu:"Lycée Seydina Limamou Laye, Dakar, Sénégal",desc:"Obtention du baccalauréat scientifique."}
   ],
   experiences:[
     {id:"stage",date:"Date début – date fin",titre:"Stage 1",lieu:"Nom de l'entreprise",desc:"Missions principales. (À compléter)"},

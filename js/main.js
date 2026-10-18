@@ -21,7 +21,6 @@ if(page==="home"){
  $("#skills").innerHTML=COMPETENCES.map((c,i)=>`<button class="skill" data-i="${i}"><span class="ic">${c.icone}</span>${c.nom}<small>En savoir plus →</small></button>`).join("");
  document.querySelectorAll(".skill").forEach(b=>b.onclick=()=>{const c=COMPETENCES[b.dataset.i];$("#modal .box").innerHTML=`<button aria-label="Fermer">×</button><h3>${c.icone} ${c.nom}</h3><p>${c.desc}</p><p><b>Ce que j'ai fait :</b> ${c.fait}</p>`;$("#modal").classList.add("open");$("#modal button").onclick=()=>$("#modal").classList.remove("open")});
  $("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("open")};
- $("#formation").innerHTML=PARCOURS.formation.map(f=>`<div class="it"><div class="meta">${f.date} · ${f.lieu}</div><h3>${f.titre}</h3><p>${f.desc}</p></div>`).join("");
  $("#experiences").innerHTML=PARCOURS.experiences.map(e=>`<div class="it"><div class="meta">${e.date} · ${e.lieu}</div><h3>${e.titre}</h3><p>${e.desc}</p><a href="projects.html#${e.id}">Voir les missions</a></div>`).join("");
  $("#contact-card").innerHTML=`<p>Courriel : <a href="mailto:${PROFILE.email}">${PROFILE.email}</a></p><p>Ville : ${PROFILE.ville}</p><p><a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a> · <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a></p>`;
 }
@@ -43,4 +42,42 @@ if(page==="veille"){
  $("#v-sujet").textContent=VEILLE.sujet; $("#v-why").textContent=VEILLE.pourquoi;
  $("#v-outils").innerHTML=tags(VEILLE.outils); $("#v-sources").innerHTML=VEILLE.sources.map(s=>`<li>${s}</li>`).join("");
  $("#v-syn").innerHTML=VEILLE.syntheses.map(s=>`<div class="it"><div class="meta">${s.date} · ${s.source}</div><h3>${s.titre}</h3><p>${s.resume}</p><a href="${s.lien}" target="_blank" rel="noopener">Lire la source</a></div>`).join("");
+}
+
+/* ===== OUTILS UTILISÉS : modifiez cette liste (nom, logo) ===== */
+const TECHS=[["Windows Server","windows"],["Windows 10","windows"],["Linux","linux"],["VMware","vmware"],["pfSense","pfsense"],["MikroTik","mikrotik"],["GNS3",""],["GitHub","github"],["VS Code","visualstudiocode"]];
+if(page==="home"){
+ const css=`.mq{overflow:hidden;margin:14px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mt{display:flex;width:max-content;animation:mv 30s linear infinite}.mt.rev{animation-direction:reverse}.mq:hover .mt{animation-play-state:paused}
+@keyframes mv{to{transform:translateX(-25%)}}
+.tp{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 22px 8px 8px;margin-right:16px;font-weight:600;white-space:nowrap}
+.lg{position:relative;width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center;color:#333;font-weight:800}
+.lg img{position:absolute;inset:7px;width:26px;height:26px;background:#fff}
+@media(prefers-reduced-motion:reduce){.mt{animation:none;flex-wrap:wrap;width:auto}}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const pill=([n,s])=>`<span class="tp"><span class="lg">${s?`<img src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/${s}.svg" alt="" onerror="this.remove()">`:""}<b>${n[0]}</b></span>${n}</span>`;
+ const row=(arr,cls)=>`<div class="mq"><div class="mt ${cls}">${arr.concat(arr,arr,arr).map(pill).join("")}</div></div>`;
+ const h=Math.ceil(TECHS.length/2);
+ $("#about").insertAdjacentHTML("afterend",`<section id="stack"><div class="wrap"><div class="kicker mono">02. Stack</div><h2>Technologies utilisées</h2><p class="sub">Les outils que j'utilise pour installer, configurer et sécuriser des systèmes et des réseaux.</p><p class="meta mono">Systèmes · Réseau · Virtualisation · Développement</p>${row(TECHS.slice(0,h),"")}${row(TECHS.slice(h),"rev")}</div></section>`);
+}
+
+/* ===== PARCOURS SCOLAIRE : frise verticale (données dans data.js > PARCOURS.formation) ===== */
+if(page==="home"){
+ const css=`#parcours .ctr{display:block;text-align:center;border:0;margin:0 0 36px}
+.kc{text-align:center}
+.st{position:relative;max-width:860px;margin:0 auto 50px;padding-left:52px}
+.st:before{content:"";position:absolute;left:11px;top:12px;bottom:12px;width:2px;background:var(--line)}
+.si{position:relative;margin-bottom:38px}
+.si:before{content:"";position:absolute;left:-52px;top:2px;width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+.si.now:before{border-color:var(--acc);box-shadow:0 0 14px rgba(164,93,240,.55)}
+.sh{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.sh h3{margin:0;font-size:1.25rem}
+.pill{border:1px solid var(--line);border-radius:99px;padding:3px 14px;font-family:Consolas,monospace;font-size:13px;color:var(--mute);white-space:nowrap}
+.si.now .pill{border-color:#4b2a7a;background:#2a1a40;color:var(--acc)}
+.si .lieu{font-weight:700;margin:8px 0 4px}.si p{color:var(--mute);margin:0}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const w=$("#parcours .wrap");
+ w.querySelector("h2").outerHTML='<div class="kicker mono kc">03. Formation</div><h2 class="ctr">Parcours scolaire</h2>';
+ w.querySelector(".sub").remove(); w.querySelector("h3").remove();
+ $("#formation").outerHTML='<div class="st">'+PARCOURS.formation.map(f=>`<div class="si${f.now?" now":""}"><div class="sh"><h3>${f.titre}</h3><span class="pill">${f.date}</span></div><div class="lieu">${f.lieu}</div><p>${f.desc}</p></div>`).join("")+"</div>";
 }
