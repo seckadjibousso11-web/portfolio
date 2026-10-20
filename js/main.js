@@ -22,7 +22,6 @@ if(page==="home"){
  document.querySelectorAll(".skill").forEach(b=>b.onclick=()=>{const c=COMPETENCES[b.dataset.i];$("#modal .box").innerHTML=`<button aria-label="Fermer">×</button><h3>${c.icone} ${c.nom}</h3><p>${c.desc}</p><p><b>Ce que j'ai fait :</b> ${c.fait}</p>`;$("#modal").classList.add("open");$("#modal button").onclick=()=>$("#modal").classList.remove("open")});
  $("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("open")};
  $("#experiences").innerHTML=PARCOURS.experiences.map(e=>`<div class="it"><div class="meta">${e.date} · ${e.lieu}</div><h3>${e.titre}</h3><p>${e.desc}</p><a href="projects.html#${e.id}">Voir les missions</a></div>`).join("");
- $("#contact-card").innerHTML=`<p>Courriel : <a href="mailto:${PROFILE.email}">${PROFILE.email}</a></p><p>Ville : ${PROFILE.ville}</p><p><a href="${PROFILE.linkedin}" target="_blank" rel="noopener">LinkedIn</a> · <a href="${PROFILE.github}" target="_blank" rel="noopener">GitHub</a></p>`;
 }
 if(page==="projects"){
  const draw=f=>{$("#list").innerHTML=PROJETS.filter(p=>f==="all"||p.categorie===f).map(p=>`<article class="card" id="${p.id}">${img(p.image,p.titre)}<div class="meta">${p.date} · ${p.categorie}</div><h3>${p.titre}</h3><p>${p.resume}</p>${tags(p.technos)}<p><a href="details.html?id=${p.id}">Voir le détail</a></p></article>`).join("")||"<p>Aucun projet dans cette catégorie.</p>"};
@@ -80,4 +79,47 @@ if(page==="home"){
  w.querySelector("h2").outerHTML='<div class="kicker mono kc">03. Formation</div><h2 class="ctr">Parcours scolaire</h2>';
  w.querySelector(".sub").remove(); w.querySelector("h3").remove();
  $("#formation").outerHTML='<div class="st">'+PARCOURS.formation.map(f=>`<div class="si${f.now?" now":""}"><div class="sh"><h3>${f.titre}</h3><span class="pill">${f.date}</span></div><div class="lieu">${f.lieu}</div><p>${f.desc}</p></div>`).join("")+"</div>";
+}
+
+/* ===== CONTACT : cartes + formulaire (infos dans data.js > PROFILE) ===== */
+if(page==="home"){
+ const css=`.ct{display:grid;gap:30px;grid-template-columns:1fr 1.25fr;align-items:start;margin-top:28px}
+@media(max-width:860px){.ct{grid-template-columns:1fr}}
+.cc{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;color:var(--ink);text-decoration:none}
+a.cc:hover{border-color:var(--acc)}
+.ci{width:46px;height:46px;border-radius:12px;background:#2a1a40;display:grid;place-items:center;font-size:20px;flex:none}
+.cc small{display:block;color:var(--mute);font-family:Consolas,monospace;font-size:13px}.cc b{font-size:1.05rem;word-break:break-all}
+.dot{width:12px;height:12px;border-radius:50%;background:#22c55e;flex:none;margin:0 6px}
+.fm{background:var(--card);border:1px solid #2d2144;border-radius:18px;padding:26px}
+.fm h3{margin:0}.fm .meta{margin:2px 0 18px}
+.fr{display:grid;gap:14px;grid-template-columns:1fr 1fr}@media(max-width:600px){.fr{grid-template-columns:1fr}}
+.fm label{display:block;font-family:Consolas,monospace;font-size:13px;color:var(--mute);margin:12px 0 6px}
+.fm input,.fm textarea{width:100%;background:#1c1c22;border:1px solid var(--line);border-radius:10px;padding:13px 14px;color:var(--ink);font:inherit}
+.fm input:focus,.fm textarea:focus{outline:2px solid var(--acc);border-color:var(--acc)}
+.fm textarea{min-height:150px;resize:vertical}
+.cnt{text-align:right;font-family:Consolas,monospace;font-size:13px;color:var(--acc);margin:6px 0 14px}
+.fm button{width:100%;border:0;border-radius:10px;background:var(--acc);color:#fff;font:700 1rem inherit;padding:14px;cursor:pointer}
+#fmok{display:none;margin-top:14px;color:#22c55e}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const liShort=PROFILE.linkedin.replace(/^https?:\/\/(www\.)?/,""), ghShort=PROFILE.github.replace(/^https?:\/\/(www\.)?/,"");
+ $("#contact .wrap").innerHTML=`<div class="kicker mono">06. Contact</div><h2>Me contacter</h2>
+ <p class="sub">Une question ou envie d'échanger ? Écrivez-moi via le formulaire ou directement par l'un des canaux ci-dessous.</p>
+ <div class="ct"><div>
+  <a class="cc" href="mailto:${PROFILE.email}"><span class="ci">✉️</span><span><small>Email</small><b>${PROFILE.email}</b></span></a>
+  <a class="cc" href="${PROFILE.linkedin}" target="_blank" rel="noopener"><span class="ci">💼</span><span><small>LinkedIn</small><b>${liShort}</b></span></a>
+  <a class="cc" href="${PROFILE.github}" target="_blank" rel="noopener"><span class="ci">🐙</span><span><small>GitHub</small><b>${ghShort}</b></span></a>
+  <div class="cc"><span class="ci">📍</span><span><small>Localisation</small><b>${PROFILE.ville}</b></span></div>
+  <div class="cc"><span class="dot"></span><span><b>${PROFILE.statut}</b><small>Session d'examen ${PROFILE.session}</small></span></div>
+ </div>
+ <form class="fm" id="fm"><h3>Envoyer un message</h3><div class="meta mono">Je réponds sous 24 à 48 h</div>
+  <div class="fr"><div><label for="fn">Votre nom</label><input id="fn" placeholder="Prénom Nom" autocomplete="name"></div>
+  <div><label for="fe">Email *</label><input id="fe" type="email" required placeholder="votre@email.com" autocomplete="email"></div></div>
+  <label for="fs">Sujet</label><input id="fs" placeholder="Question, proposition de stage...">
+  <label for="fmsg">Message *</label><textarea id="fmsg" required maxlength="1000" placeholder="Bonjour, je souhaite..."></textarea>
+  <div class="cnt" id="cnt">0 caractère</div><button type="submit">Envoyer le message</button><p id="fmok">Votre application de messagerie s'ouvre avec le message prêt à envoyer.</p></form></div>`;
+ $("#fmsg").oninput=e=>{const n=e.target.value.length;$("#cnt").textContent=n+(n>1?" caractères":" caractère")};
+ $("#fm").onsubmit=e=>{e.preventDefault();
+  const body=$("#fmsg").value+"\n\n"+($("#fn").value||"")+"\n"+$("#fe").value;
+  location.href="mailto:"+PROFILE.email+"?subject="+encodeURIComponent($("#fs").value||"Contact depuis le portfolio")+"&body="+encodeURIComponent(body);
+  $("#fmok").style.display="block"};
 }

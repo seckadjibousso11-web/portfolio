@@ -10,8 +10,8 @@ const PROFILE={
     "Pendant ma formation, je réalise des projets concrets : installer des serveurs, configurer des réseaux, gérer des utilisateurs et sécuriser l'ensemble. C'est ce qui me permet de passer de la théorie à la pratique.",
     "Je prépare mon diplôme pour la session <b>2026-2027</b> et je m'intéresse particulièrement à la <b>cybersécurité</b>, que j'aimerais approfondir ensuite."
   ],
-  ville:"Paris, France", langues:"FR", email:"boussoseckadji6@gmail.com",
-  linkedin:"https://www.linkedin.com/",
+  ville:"Lieusaint, France", langues:"FR", email:"boussoseckadji6@gmail.com",
+  linkedin:"https://www.linkedin.com/in/adji-bousso-seck-1a22aa332",
   github:"https://github.com/seckadjibousso11-web",
   cv:"pdf/cv.pdf"
 };
