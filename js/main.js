@@ -83,40 +83,58 @@ if(page==="home"){
 
 /* ===== CONTACT : cartes + formulaire (infos dans data.js > PROFILE) ===== */
 if(page==="home"){
- const css=`.ct{display:grid;gap:30px;grid-template-columns:1fr 1.25fr;align-items:start;margin-top:28px}
-@media(max-width:860px){.ct{grid-template-columns:1fr}}
-.cc{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;color:var(--ink);text-decoration:none}
+ const ic=p=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+ const I={
+  mail:ic('<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>'),
+  li:ic('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'),
+  gh:ic('<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>'),
+  pin:ic('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'),
+  send:ic('<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>'),
+  user:ic('<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>'),
+  tag:ic('<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>'),
+  msg:ic('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>')
+ };
+ const css=`.ct{display:grid;gap:44px;grid-template-columns:1fr 1.35fr;align-items:start;margin-top:10px}
+@media(max-width:900px){.ct{grid-template-columns:1fr}}
+.ctl p{color:var(--mute);font-size:1.05rem;margin:6px 0 22px;line-height:1.9}
+.cc{display:flex;align-items:center;gap:18px;background:#0f0f12;border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-bottom:16px;color:var(--ink);text-decoration:none}
 a.cc:hover{border-color:var(--acc)}
-.ci{width:46px;height:46px;border-radius:12px;background:#2a1a40;display:grid;place-items:center;font-size:20px;flex:none}
-.cc small{display:block;color:var(--mute);font-family:Consolas,monospace;font-size:13px}.cc b{font-size:1.05rem;word-break:break-all}
-.dot{width:12px;height:12px;border-radius:50%;background:#22c55e;flex:none;margin:0 6px}
-.fm{background:var(--card);border:1px solid #2d2144;border-radius:18px;padding:26px}
-.fm h3{margin:0}.fm .meta{margin:2px 0 18px}
-.fr{display:grid;gap:14px;grid-template-columns:1fr 1fr}@media(max-width:600px){.fr{grid-template-columns:1fr}}
-.fm label{display:block;font-family:Consolas,monospace;font-size:13px;color:var(--mute);margin:12px 0 6px}
-.fm input,.fm textarea{width:100%;background:#1c1c22;border:1px solid var(--line);border-radius:10px;padding:13px 14px;color:var(--ink);font:inherit}
+.ci{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;flex:none;border:1px solid rgba(255,255,255,.06)}
+.c1{background:#2a1a40;color:#b57cf7}.c2{background:#14263f;color:#5aa7ff}.c3{background:#1f1830;color:#c39bff}.c4{background:#12281c;color:#3ddc84}
+.cc small{display:block;color:var(--mute);font-family:Consolas,monospace;font-size:13px;margin-bottom:2px}.cc b{font-size:1.1rem;word-break:break-all}
+.dot{width:12px;height:12px;border-radius:50%;background:#22c55e;flex:none;margin:0 8px 0 4px}
+.cc.av small{margin:4px 0 0}
+.fm{background:#151518;border:1px solid #2a2338;border-radius:26px;padding:40px}
+.fh{display:flex;align-items:center;gap:16px;margin-bottom:28px}.fh .ci{width:50px;height:50px;background:#2a1a40;color:#b57cf7}
+.fh h3{margin:0;font-size:1.2rem}.fh small{font-family:Consolas,monospace;font-size:13px;color:var(--mute)}
+.fr{display:grid;gap:20px;grid-template-columns:1fr 1fr}@media(max-width:600px){.fr{grid-template-columns:1fr}.fm{padding:24px}}
+.fm label{display:flex;align-items:center;gap:8px;font-family:Consolas,monospace;font-size:13px;color:var(--mute);margin:20px 0 10px}
+.fm label svg{width:14px;height:14px;color:#a45df0}.fr label{margin-top:0}
+.rq{color:#f0506e}
+.fm input,.fm textarea{width:100%;background:#1e1e22;border:1px solid #2a2a31;border-radius:14px;padding:18px 20px;color:var(--ink);font:inherit}
+.fm input::placeholder,.fm textarea::placeholder{color:#6f6c80}
 .fm input:focus,.fm textarea:focus{outline:2px solid var(--acc);border-color:var(--acc)}
-.fm textarea{min-height:150px;resize:vertical}
-.cnt{text-align:right;font-family:Consolas,monospace;font-size:13px;color:var(--acc);margin:6px 0 14px}
-.fm button{width:100%;border:0;border-radius:10px;background:var(--acc);color:#fff;font:700 1rem inherit;padding:14px;cursor:pointer}
-#fmok{display:none;margin-top:14px;color:#22c55e}`;
+.fm textarea{min-height:170px;resize:vertical}
+.cnt{text-align:right;font-family:Consolas,monospace;font-size:13px;color:var(--acc);margin:12px 0 22px}
+.fm button{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:14px;background:#a855f7;color:#fff;font:700 1.05rem "Segoe UI",system-ui,sans-serif;padding:18px;cursor:pointer}
+.fm button svg{width:20px;height:20px}.fm button:hover{background:#b46cf9}
+#fmok{display:none;margin:16px 0 0;color:#22c55e}`;
  document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
  const liShort=PROFILE.linkedin.replace(/^https?:\/\/(www\.)?/,""), ghShort=PROFILE.github.replace(/^https?:\/\/(www\.)?/,"");
- $("#contact .wrap").innerHTML=`<div class="kicker mono">06. Contact</div><h2>Me contacter</h2>
- <p class="sub">Une question ou envie d'échanger ? Écrivez-moi via le formulaire ou directement par l'un des canaux ci-dessous.</p>
- <div class="ct"><div>
-  <a class="cc" href="mailto:${PROFILE.email}"><span class="ci">✉️</span><span><small>Email</small><b>${PROFILE.email}</b></span></a>
-  <a class="cc" href="${PROFILE.linkedin}" target="_blank" rel="noopener"><span class="ci">💼</span><span><small>LinkedIn</small><b>${liShort}</b></span></a>
-  <a class="cc" href="${PROFILE.github}" target="_blank" rel="noopener"><span class="ci">🐙</span><span><small>GitHub</small><b>${ghShort}</b></span></a>
-  <div class="cc"><span class="ci">📍</span><span><small>Localisation</small><b>${PROFILE.ville}</b></span></div>
-  <div class="cc"><span class="dot"></span><span><b>${PROFILE.statut}</b><small>Session d'examen ${PROFILE.session}</small></span></div>
+ $("#contact .wrap").innerHTML=`<div class="kicker mono">06. Contact</div><h2 style="border:0;font-size:clamp(2rem,5vw,3rem);margin-bottom:40px">Me Contacter</h2>
+ <div class="ct"><div class="ctl"><p>Vous avez une question ou souhaitez échanger ? Contactez-moi via le formulaire ou directement par l'un des canaux ci-dessous.</p>
+  <a class="cc" href="mailto:${PROFILE.email}"><span class="ci c1">${I.mail}</span><span><small>Email</small><b>${PROFILE.email}</b></span></a>
+  <a class="cc" href="${PROFILE.linkedin}" target="_blank" rel="noopener"><span class="ci c2">${I.li}</span><span><small>LinkedIn</small><b>${liShort}</b></span></a>
+  <a class="cc" href="${PROFILE.github}" target="_blank" rel="noopener"><span class="ci c3">${I.gh}</span><span><small>GitHub</small><b>${ghShort}</b></span></a>
+  <div class="cc"><span class="ci c4">${I.pin}</span><span><small>Localisation</small><b>${PROFILE.ville}</b></span></div>
+  <div class="cc av"><span class="dot"></span><span><b>${PROFILE.statut}</b><small>Session d'examen ${PROFILE.session}</small></span></div>
  </div>
- <form class="fm" id="fm"><h3>Envoyer un message</h3><div class="meta mono">Je réponds sous 24 à 48 h</div>
-  <div class="fr"><div><label for="fn">Votre nom</label><input id="fn" placeholder="Prénom Nom" autocomplete="name"></div>
-  <div><label for="fe">Email *</label><input id="fe" type="email" required placeholder="votre@email.com" autocomplete="email"></div></div>
-  <label for="fs">Sujet</label><input id="fs" placeholder="Question, proposition de stage...">
-  <label for="fmsg">Message *</label><textarea id="fmsg" required maxlength="1000" placeholder="Bonjour, je souhaite..."></textarea>
-  <div class="cnt" id="cnt">0 caractère</div><button type="submit">Envoyer le message</button><p id="fmok">Votre application de messagerie s'ouvre avec le message prêt à envoyer.</p></form></div>`;
+ <form class="fm" id="fm"><div class="fh"><span class="ci">${I.send}</span><div><h3>Envoyer un message</h3><small>Je réponds sous 24-48h</small></div></div>
+  <div class="fr"><div><label for="fn">${I.user}Votre nom</label><input id="fn" placeholder="Prénom Nom" autocomplete="name"></div>
+  <div><label for="fe">${I.mail}Email <span class="rq">*</span></label><input id="fe" type="email" required placeholder="votre@email.com" autocomplete="email"></div></div>
+  <label for="fs">${I.tag}Sujet</label><input id="fs" placeholder="Question, proposition de stage...">
+  <label for="fmsg">${I.msg}Message <span class="rq">*</span></label><textarea id="fmsg" required maxlength="1000" placeholder="Bonjour, je souhaite..."></textarea>
+  <div class="cnt" id="cnt">0 caractère</div><button type="submit">${I.send}Envoyer le message</button><p id="fmok">Votre application de messagerie s'ouvre avec le message prêt à envoyer.</p></form></div>`;
  $("#fmsg").oninput=e=>{const n=e.target.value.length;$("#cnt").textContent=n+(n>1?" caractères":" caractère")};
  $("#fm").onsubmit=e=>{e.preventDefault();
   const body=$("#fmsg").value+"\n\n"+($("#fn").value||"")+"\n"+$("#fe").value;
