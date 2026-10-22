@@ -141,3 +141,46 @@ a.cc:hover{border-color:var(--acc)}
   location.href="mailto:"+PROFILE.email+"?subject="+encodeURIComponent($("#fs").value||"Contact depuis le portfolio")+"&body="+encodeURIComponent(body);
   $("#fmok").style.display="block"};
 }
+
+/* ===== PIED DE PAGE (affiché sur toutes les pages) ===== */
+(function(){
+ const fic=p=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+ const FI={
+  gh:fic('<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>'),
+  li:fic('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>'),
+  cv:fic('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><polyline points="9 14 12 17 15 14"/>'),
+  mail:fic('<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>'),
+  pin:fic('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'),
+  up:fic('<line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>')
+ };
+ const css=`#site-footer{border-top:1px solid var(--line);padding:70px 0 30px;text-align:left;font-size:16px;color:var(--mute);margin-top:30px}
+#site-footer .fg{display:grid;gap:50px;grid-template-columns:1.7fr 1fr 1.2fr}
+@media(max-width:800px){#site-footer .fg{grid-template-columns:1fr;gap:34px}}
+#site-footer .fb{font-weight:800;font-size:1.5rem;letter-spacing:.08em;text-transform:uppercase;color:#d9b8ff}#site-footer .fb b{color:#a855f7}
+#site-footer p.fd{max-width:46ch;line-height:1.9;margin:22px 0 28px}
+#site-footer .so{display:flex;gap:16px}
+#site-footer .so a{width:48px;height:48px;border-radius:12px;border:1px solid var(--line);background:#0f0f12;display:grid;place-items:center;color:var(--ink)}
+#site-footer .so a:hover{border-color:var(--acc);color:var(--acc)}
+#site-footer h4{margin:0 0 22px;color:var(--ink);font-size:1.1rem}
+#site-footer ul{list-style:none;margin:0;padding:0}#site-footer li{margin-bottom:16px}
+#site-footer li a{color:var(--mute);text-decoration:none;padding-left:14px}#site-footer li a:hover{color:var(--acc)}
+#site-footer .fi{display:flex;gap:14px;align-items:flex-start;margin-bottom:26px}
+#site-footer .fi svg{margin-top:20px;flex:none}.fi .m{color:#a45df0}.fi .g{color:#3ddc84}
+#site-footer .fi small{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7fb2e6;margin-bottom:4px}
+#site-footer .fi span{word-break:break-all}
+#site-footer .fz{display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid var(--line);margin-top:50px;padding-top:34px;font-family:Consolas,monospace;font-size:14px}
+#site-footer .up{width:52px;height:52px;border-radius:12px;border:1px solid #3a2a5c;background:#1a1030;color:#b57cf7;display:grid;place-items:center;cursor:pointer}
+#site-footer .up:hover{border-color:var(--acc)}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const items=NAV.slice(0,5).map(([h,l])=>`<li><a href="${h}">${l}</a></li>`).join("");
+ const texte=PROFILE.pied||"Étudiante en BTS SIO option SISR à l'ITIC Paris, je me forme à l'administration des systèmes et des réseaux et à la sécurisation des infrastructures.";
+ $("#site-footer").innerHTML=`<div class="wrap"><div class="fg">
+  <div><div class="fb">${full}<b>.</b></div><p class="fd">${texte}</p>
+   <div class="so"><a href="${PROFILE.github}" target="_blank" rel="noopener" aria-label="GitHub">${FI.gh}</a><a href="${PROFILE.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">${FI.li}</a><a href="${PROFILE.cv}" target="_blank" rel="noopener" aria-label="Télécharger mon CV">${FI.cv}</a></div></div>
+  <div><h4>Navigation</h4><ul>${items}</ul></div>
+  <div><h4>Contact</h4><div class="fi"><span class="m">${FI.mail}</span><div><small>Email</small><span>${PROFILE.email}</span></div></div>
+   <div class="fi"><span class="g">${FI.pin}</span><div><small>Localisation</small><span>${PROFILE.ville}</span></div></div></div>
+ </div>
+ <div class="fz"><span>© ${new Date().getFullYear()} ${full} — Tous droits réservés</span><button class="up" id="up" aria-label="Retour en haut">${FI.up}</button></div></div>`;
+ $("#up").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+})();
