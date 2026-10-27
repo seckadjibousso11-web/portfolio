@@ -184,3 +184,19 @@ a.cc:hover{border-color:var(--acc)}
  <div class="fz"><span>© ${new Date().getFullYear()} ${full} — Tous droits réservés</span><button class="up" id="up" aria-label="Retour en haut">${FI.up}</button></div></div>`;
  $("#up").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 })();
+
+/* ===== EXPÉRIENCES + SECTION « PROJETS & MISSIONS » (accueil) ===== */
+if(page==="home"){
+ const css=`#exp .ctr,#pf .ctr{display:block;text-align:center;border:0;margin:0 0 30px}
+#exp .tl{max-width:860px;margin:0 auto}
+#pf{background:#0d0d10;text-align:center;padding:90px 0}
+#pf p.pt{max-width:56ch;margin:0 auto 34px;color:var(--mute);font-size:1.1rem;line-height:1.9}
+#pf .pfb{display:inline-flex;align-items:center;gap:10px;padding:17px 32px;border-radius:12px;font-size:1.05rem;margin:0}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const par=$("#parcours"), exp=$("#experiences");
+ const oldH=par.querySelector(".wrap > h3"); if(oldH) oldH.remove();
+ par.insertAdjacentHTML("afterend",'<section id="exp"><div class="wrap"><div class="kicker mono kc">04. Expériences</div><h2 class="ctr">Expériences professionnelles</h2></div></section>');
+ $("#exp .wrap").appendChild(exp);
+ const folder='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
+ $("#exp").insertAdjacentHTML("afterend",`<section id="pf"><div class="wrap"><div class="kicker mono">05. Portfolio</div><h2 class="ctr">Projets &amp; Missions</h2><p class="pt">Mes projets de formation et mes missions de stage sont regroupés sur une page dédiée, avec captures d'écran et documents.</p><a class="btn pfb" href="projects.html">${folder}Accéder au Portfolio</a></div></section>`);
+}
