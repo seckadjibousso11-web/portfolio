@@ -37,18 +37,25 @@ const PARCOURS={
 };
 /* categorie : "stage" | "formation"  — image : captures à déposer dans assets/projects/ */
 const PROJETS=[
-  {id:"projet1",titre:"Titre du projet 1",categorie:"formation",date:"2025",
-   resume:"Une phrase qui résume le projet. (À compléter)",
-   contexte:"Pourquoi ce projet ? Quel besoin, quel client, quelle consigne ? (À compléter)",
-   technos:["Windows Server","Active Directory"],
-   missions:["Ce que j'ai fait, étape 1","Étape 2","Étape 3"],
-   competences:["B1.1","B2.1"],
-   image:"assets/projects/projet1.png",
-   captures:[],
-   documents:[]},
-  {id:"projet2",titre:"Titre du projet 2",categorie:"stage",date:"2025",
-   resume:"À compléter",contexte:"À compléter",technos:["pfSense"],missions:["À compléter"],
-   competences:[],image:"assets/projects/projet2.png",captures:[],documents:[]}
+  {id:"sio_sys",type:"atelier",titre:"Ateliers Systèmes",categorie:"formation",date:"2025 — 2027",icone:"server",couleur:"blue",image:"assets/projects/sio_sys.jpg",
+   resume:"Administration de Windows Server et de Linux dans des environnements virtualisés (VMware). Installation, configuration des services et gestion des postes Windows 10.",
+   contexte:"Ateliers réalisés pendant le BTS SIO option SISR à l'ITIC Paris. (À compléter : sujet, consignes, durée)",
+   technos:["Windows Server","Windows 10","Linux","VMware"],
+   missions:["À compléter : étape 1","À compléter : étape 2","À compléter : étape 3"],
+   competences:[],captures:[],documents:[]},
+  {id:"sio_net",type:"atelier",titre:"Ateliers Réseaux",categorie:"formation",date:"2025 — 2027",icone:"network",couleur:"orange",image:"assets/projects/sio_net.jpg",
+   resume:"Architecture et paramétrage d'équipements réseau avec MikroTik et pfSense. Simulation et validation de topologies sous GNS3.",
+   contexte:"Ateliers réalisés pendant le BTS SIO option SISR à l'ITIC Paris. (À compléter : sujet, consignes, durée)",
+   technos:["MikroTik","pfSense","GNS3"],
+   missions:["À compléter : étape 1","À compléter : étape 2","À compléter : étape 3"],
+   competences:[],captures:[],documents:[]},
+  {id:"bts_exam",type:"examen",titre:"Dossiers d'Examen",categorie:"formation",date:"Session "+"2026-2027",icone:"file",
+   resume:"Mes travaux produits pour la soutenance devant le jury du BTS : contextes de réalisation, fiches méthodologiques de résolution de problèmes techniques et documentation associée.",
+   image:"assets/projects/bts.jpg",
+   contexte:"Dossiers présentés au jury dans le cadre des épreuves professionnelles du BTS SIO option SISR. (À compléter)",
+   technos:["Windows Server","pfSense","VMware","Linux"],
+   missions:["À compléter : réalisation 1","À compléter : réalisation 2"],
+   competences:[],captures:[],documents:[]}
 ];
 const VEILLE={
   sujet:"Sujet de votre veille technologique (À compléter)",

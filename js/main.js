@@ -23,11 +23,6 @@ if(page==="home"){
  $("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("open")};
  $("#experiences").innerHTML=PARCOURS.experiences.map(e=>`<div class="it"><div class="meta">${e.date} · ${e.lieu}</div><h3>${e.titre}</h3><p>${e.desc}</p><a href="projects.html#${e.id}">Voir les missions</a></div>`).join("");
 }
-if(page==="projects"){
- const draw=f=>{$("#list").innerHTML=PROJETS.filter(p=>f==="all"||p.categorie===f).map(p=>`<article class="card" id="${p.id}">${img(p.image,p.titre)}<div class="meta">${p.date} · ${p.categorie}</div><h3>${p.titre}</h3><p>${p.resume}</p>${tags(p.technos)}<p><a href="details.html?id=${p.id}">Voir le détail</a></p></article>`).join("")||"<p>Aucun projet dans cette catégorie.</p>"};
- document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.f)});
- draw("all");
-}
 if(page==="details"){
  const p=PROJETS.find(x=>x.id===new URLSearchParams(location.search).get("id"));
  $("#detail").innerHTML=p?`<p><a href="projects.html">← Tous les projets</a></p><div class="meta">${p.date} · ${p.categorie}</div><h1>${p.titre}</h1>
@@ -199,4 +194,48 @@ if(page==="home"){
  $("#exp .wrap").appendChild(exp);
  const folder='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>';
  $("#exp").insertAdjacentHTML("afterend",`<section id="pf"><div class="wrap"><div class="kicker mono">05. Portfolio</div><h2 class="ctr">Projets &amp; Missions</h2><p class="pt">Mes projets de formation et mes missions de stage sont regroupés sur une page dédiée, avec captures d'écran et documents.</p><a class="btn pfb" href="projects.html">${folder}Accéder au Portfolio</a></div></section>`);
+}
+
+/* ===== PAGE PROJETS & MISSIONS (données dans data.js > PROJETS) ===== */
+if(page==="projects"){
+ const sv=(p,s=26)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+ const IC={
+  server:sv('<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>'),
+  network:sv('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>'),
+  file:sv('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>')
+ };
+ const FL={all:["Tout",sv('<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',16)],
+  formation:["Formation",sv('<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>',16)],
+  stage:["Stages",sv('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',16)]};
+ const COL={blue:"cb",orange:"co"};
+ const css=`.ph{text-align:center;max-width:640px;margin:0 auto 34px}.ph h1{font-size:clamp(2.2rem,6vw,3.4rem);margin:.15em 0}.ph p{color:var(--mute)}
+.cb{--c:#3b82f6;--cs:#12203a}.co{--c:#f97316;--cs:#2a170c}.cp{--c:#b57cf7;--cs:#2a1a40}
+.fbar{display:flex;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:38px}
+.fbar button{display:inline-flex;align-items:center;gap:8px;background:#0f0f12;border:1px solid var(--line);border-radius:10px;color:var(--mute);padding:10px 16px;cursor:pointer;font:600 14px Consolas,monospace}
+.fbar button.on{background:#a855f7;border-color:#a855f7;color:#fff;box-shadow:0 0 22px rgba(168,85,247,.5)}
+.pt2{font-size:1.7rem;margin:0;border:0}.pst{color:var(--mute);font-family:Consolas,monospace;margin:4px 0 24px}
+.ps{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;color:var(--ink);text-decoration:none}
+.ps:hover{border-color:var(--c)}
+.ig{position:relative;height:200px;background:linear-gradient(135deg,var(--cs),#0d0d10);display:grid;place-items:center;color:var(--c)}
+.ig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pb{padding:36px 40px 38px}.pb .ti{width:60px;height:60px;border-radius:14px;background:var(--cs);color:var(--c);display:grid;place-items:center;margin-bottom:26px}
+.pb h3{margin:0 0 14px;font-size:1.4rem}.pb p{margin:0 0 26px;color:var(--mute);line-height:1.8}.pb .go{color:var(--c);font-weight:700}
+.ex{display:grid;grid-template-columns:1fr 1.2fr;margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+@media(max-width:760px){.ex{grid-template-columns:1fr}.pb{padding:26px}}
+.ex .ig{height:auto;min-height:240px}.ex .tx{padding:36px}.ex h3{margin:0 0 12px;font-size:1.4rem}.ex p{color:var(--mute);margin:0 0 22px;line-height:1.8}`;
+ document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
+ const ateliers=PROJETS.filter(p=>p.type!=="examen"), ex=PROJETS.find(p=>p.type==="examen");
+ const cats=[...new Set(PROJETS.map(p=>p.categorie))];
+ const cardA=p=>`<a class="ps ${COL[p.couleur]||"cp"}" href="details.html?id=${p.id}"><div class="ig">${IC[p.icone]||""}${p.image?img(p.image,p.titre):""}</div><div class="pb"><span class="ti">${IC[p.icone]||""}</span><h3>${p.titre}</h3><p>${p.resume}</p><span class="go">Consulter le détail →</span></a>`.replace("</a>","</div></a>");
+ const draw=f=>{
+  const show=c=>f==="all"||f===c;
+  $("#res").innerHTML=(show("formation")?`<h2 class="pt2">Travaux de Formation</h2><p class="pst">Parcours BTS SIO SISR</p><div class="grid">${ateliers.map(cardA).join("")}</div>
+  ${ex?`<div class="ex cp"><div class="ig">${IC.file}${ex.image?img(ex.image,ex.titre):""}</div><div class="tx"><h3>${ex.titre}</h3><p>${ex.resume}</p><a class="btn" href="details.html?id=${ex.id}">Accéder aux dossiers</a></div></div>`:""}`:"")
+  +(show("stage")?`<p class="pst">Aucun stage ajouté pour l'instant.</p>`:"");
+  document.querySelectorAll(".fbar button").forEach(b=>b.classList.toggle("on",b.dataset.f===f));
+ };
+ $("main").innerHTML=`<div class="ph"><div class="kicker mono">05. Portfolio</div><h1>Projets &amp; Missions</h1><p>Présentation détaillée de mes travaux de formation et accès aux dossiers du BTS.</p></div>
+ <div class="fbar">${["all",...cats].map(c=>`<button data-f="${c}">${FL[c]?FL[c][1]+FL[c][0]:c}</button>`).join("")}</div><div id="res"></div>`;
+ document.querySelectorAll(".fbar button").forEach(b=>b.onclick=()=>draw(b.dataset.f));
+ draw("all");
 }
