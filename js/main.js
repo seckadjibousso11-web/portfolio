@@ -204,38 +204,42 @@ if(page==="projects"){
   network:sv('<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>'),
   file:sv('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>')
  };
- const FL={all:["Tout",sv('<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',16)],
-  formation:["Formation",sv('<path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/>',16)],
-  stage:["Stages",sv('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',16)]};
- const COL={blue:"cb",orange:"co"};
+ const FL={all:sv('<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',16),
+  formation:sv('<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',16),
+  stage:sv('<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',16)};
  const css=`.ph{text-align:center;max-width:640px;margin:0 auto 34px}.ph h1{font-size:clamp(2.2rem,6vw,3.4rem);margin:.15em 0}.ph p{color:var(--mute)}
-.cb{--c:#3b82f6;--cs:#12203a}.co{--c:#f97316;--cs:#2a170c}.cp{--c:#b57cf7;--cs:#2a1a40}
-.fbar{display:flex;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:38px}
-.fbar button{display:inline-flex;align-items:center;gap:8px;background:#0f0f12;border:1px solid var(--line);border-radius:10px;color:var(--mute);padding:10px 16px;cursor:pointer;font:600 14px Consolas,monospace}
-.fbar button.on{background:#a855f7;border-color:#a855f7;color:#fff;box-shadow:0 0 22px rgba(168,85,247,.5)}
-.pt2{font-size:1.7rem;margin:0;border:0}.pst{color:var(--mute);font-family:Consolas,monospace;margin:4px 0 24px}
-.ps{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;color:var(--ink);text-decoration:none}
-.ps:hover{border-color:var(--c)}
-.ig{position:relative;height:200px;background:linear-gradient(135deg,var(--cs),#0d0d10);display:grid;place-items:center;color:var(--c)}
-.ig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pb{padding:36px 40px 38px}.pb .ti{width:60px;height:60px;border-radius:14px;background:var(--cs);color:var(--c);display:grid;place-items:center;margin-bottom:26px}
-.pb h3{margin:0 0 14px;font-size:1.4rem}.pb p{margin:0 0 26px;color:var(--mute);line-height:1.8}.pb .go{color:var(--c);font-weight:700}
-.ex{display:grid;grid-template-columns:1fr 1.2fr;margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
-@media(max-width:760px){.ex{grid-template-columns:1fr}.pb{padding:26px}}
-.ex .ig{height:auto;min-height:240px}.ex .tx{padding:36px}.ex h3{margin:0 0 12px;font-size:1.4rem}.ex p{color:var(--mute);margin:0 0 22px;line-height:1.8}`;
+.fb2{position:sticky;top:60px;z-index:4;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 -20px 44px;padding:16px 20px}
+.fb2 .in{display:flex;gap:12px;flex-wrap:wrap;max-width:1040px;margin:auto}
+.fb2 button{display:flex;align-items:center;gap:8px;background:#101014;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font:14px Consolas,monospace;cursor:pointer}
+.fb2 button.on{background:#a855f7;border-color:#a855f7;color:#fff;box-shadow:0 0 18px rgba(168,85,247,.45)}
+.pt2{font-size:1.7rem;margin:0;border:0}.pst{color:var(--mute);font-family:Consolas,monospace;margin:4px 0 26px}
+.pg{display:grid;gap:36px;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+.pc{display:flex;flex-direction:column;background:#101014;border:1px solid var(--line);border-radius:22px;overflow:hidden;color:var(--ink);text-decoration:none}
+.pc:hover{border-color:var(--c)}
+.pc .im{height:200px;background:linear-gradient(135deg,var(--f),#0d0d10);display:grid;place-items:center;color:var(--c);position:relative}
+.pc .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;margin:0}
+.pc .bd{padding:36px 40px 40px;display:flex;flex-direction:column;flex:1}
+.pc .ti{width:60px;height:60px;border-radius:16px;background:var(--f);color:var(--c);display:grid;place-items:center;margin-bottom:26px;border:1px solid rgba(255,255,255,.06)}
+.pc h3{margin:0 0 14px;font-size:1.5rem}.pc p{margin:0 0 26px;color:var(--mute);line-height:1.8;flex:1}.pc .go{color:var(--c);font-weight:700}
+.vide{color:var(--mute);border:1px dashed var(--line);border-radius:14px;padding:26px;margin-bottom:10px}
+.ex{display:grid;grid-template-columns:1fr 1.2fr;margin-top:36px;background:#101014;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+@media(max-width:760px){.ex{grid-template-columns:1fr}.pc .bd{padding:28px}}
+.ex .vi{min-height:240px;background:linear-gradient(135deg,#2a1a40,#0d0d10);display:grid;place-items:center;color:#b57cf7;position:relative}
+.ex .vi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:0;margin:0}
+.ex .tx{padding:36px}.ex h3{margin:0 0 12px;font-size:1.5rem}.ex p{color:var(--mute);margin:0 0 22px;line-height:1.8}`;
  document.head.insertAdjacentHTML("beforeend","<style>"+css+"</style>");
- const ateliers=PROJETS.filter(p=>p.type!=="examen"), ex=PROJETS.find(p=>p.type==="examen");
- const cats=[...new Set(PROJETS.map(p=>p.categorie))];
- const cardA=p=>`<a class="ps ${COL[p.couleur]||"cp"}" href="details.html?id=${p.id}"><div class="ig">${IC[p.icone]||""}${p.image?img(p.image,p.titre):""}</div><div class="pb"><span class="ti">${IC[p.icone]||""}</span><h3>${p.titre}</h3><p>${p.resume}</p><span class="go">Consulter le détail →</span></a>`.replace("</a>","</div></a>");
- const draw=f=>{
-  const show=c=>f==="all"||f===c;
-  $("#res").innerHTML=(show("formation")?`<h2 class="pt2">Travaux de Formation</h2><p class="pst">Parcours BTS SIO SISR</p><div class="grid">${ateliers.map(cardA).join("")}</div>
-  ${ex?`<div class="ex cp"><div class="ig">${IC.file}${ex.image?img(ex.image,ex.titre):""}</div><div class="tx"><h3>${ex.titre}</h3><p>${ex.resume}</p><a class="btn" href="details.html?id=${ex.id}">Accéder aux dossiers</a></div></div>`:""}`:"")
-  +(show("stage")?`<p class="pst">Aucun stage ajouté pour l'instant.</p>`:"");
-  document.querySelectorAll(".fbar button").forEach(b=>b.classList.toggle("on",b.dataset.f===f));
- };
- $("main").innerHTML=`<div class="ph"><div class="kicker mono">05. Portfolio</div><h1>Projets &amp; Missions</h1><p>Présentation détaillée de mes travaux de formation et accès aux dossiers du BTS.</p></div>
- <div class="fbar">${["all",...cats].map(c=>`<button data-f="${c}">${FL[c]?FL[c][1]+FL[c][0]:c}</button>`).join("")}</div><div id="res"></div>`;
- document.querySelectorAll(".fbar button").forEach(b=>b.onclick=()=>draw(b.dataset.f));
+ const cats=["stage","formation"];
+ const nom={formation:"Formation",stage:"Stages",alternance:"Alternance"};
+ $("main").innerHTML=`<div class="ph"><div class="kicker mono">05. Portfolio</div><h1>Projets &amp; <span style="color:#a855f7">Missions</span></h1><p>Présentation détaillée de mes stages et de mes travaux de formation, avec accès aux dossiers du BTS.</p></div>
+ <div class="fb2"><div class="in"><button class="on" data-f="all">${FL.all}Tout</button>${cats.map(c=>`<button data-f="${c}">${FL[c]||FL.all}${nom[c]||c}</button>`).join("")}</div></div><div id="pl"></div>`;
+ const card=p=>`<a class="pc" href="details.html?id=${p.id}" style="--c:${p.couleur};--f:${p.fond}"><div class="im">${IC[p.icone]||""}${p.image?img(p.image,p.titre):""}</div><div class="bd"><span class="ti">${IC[p.icone]||""}</span><h3>${p.titre}</h3><p>${p.resume}</p><span class="go">Consulter le détail →</span></div></a>`;
+ const draw=f=>{const l=PROJETS.filter(p=>f==="all"||p.categorie===f);
+  const st=l.filter(p=>p.categorie==="stage"),at=l.filter(p=>p.categorie==="formation"&&p.type!=="examen"),ex=l.find(p=>p.type==="examen");
+  let h="";
+  if(st.length||f==="stage")h+=`<h2 class="pt2">Stages</h2><p class="pst">Entreprises d'accueil</p>`+(st.length?`<div class="pg">${st.map(card).join("")}</div>`:`<p class="vide">Mes stages seront présentés ici : entreprise, période et missions réalisées.</p>`);
+  if(at.length||ex)h+=`<h2 class="pt2" style="margin-top:${h?"64px":"0"}">Travaux de Formation</h2><p class="pst">Parcours BTS SIO SISR</p><div class="pg">${at.map(card).join("")}</div>`
+   +(ex?`<div class="ex"><div class="vi">${IC.file}${ex.image?img(ex.image,ex.titre):""}</div><div class="tx"><h3>${ex.titre}</h3><p>${ex.resume}</p><a class="btn" href="details.html?id=${ex.id}">Accéder aux dossiers</a></div></div>`:"");
+  $("#pl").innerHTML=h};
+ document.querySelectorAll(".fb2 button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".fb2 button").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.f)});
  draw("all");
 }
