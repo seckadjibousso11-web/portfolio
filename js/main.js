@@ -131,10 +131,20 @@ a.cc:hover{border-color:var(--acc)}
   <label for="fmsg">${I.msg}Message <span class="rq">*</span></label><textarea id="fmsg" required maxlength="1000" placeholder="Bonjour, je souhaite..."></textarea>
   <div class="cnt" id="cnt">0 caractère</div><button type="submit">${I.send}Envoyer le message</button><p id="fmok">Votre application de messagerie s'ouvre avec le message prêt à envoyer.</p></form></div>`;
  $("#fmsg").oninput=e=>{const n=e.target.value.length;$("#cnt").textContent=n+(n>1?" caractères":" caractère")};
- $("#fm").onsubmit=e=>{e.preventDefault();
-  const body=$("#fmsg").value+"\n\n"+($("#fn").value||"")+"\n"+$("#fe").value;
-  location.href="mailto:"+PROFILE.email+"?subject="+encodeURIComponent($("#fs").value||"Contact depuis le portfolio")+"&body="+encodeURIComponent(body);
-  $("#fmok").style.display="block"};
+ $("#fm").onsubmit=async e=>{e.preventDefault();
+  const btn=$("#fm button[type=submit]"),ok=$("#fmok");
+  const data={name:$("#fn").value||"Visiteur",email:$("#fe").value,_replyto:$("#fe").value,_subject:$("#fs").value||"Contact depuis le portfolio",message:$("#fmsg").value,_captcha:"false",_template:"table"};
+  btn.disabled=true;ok.style.display="block";ok.style.color="var(--mute)";ok.textContent="Envoi en cours...";
+  try{
+   const r=await fetch("https://formsubmit.co/ajax/"+PROFILE.email,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+   const j=await r.json();
+   if(!r.ok||j.success===false||j.success==="false")throw new Error(j.message||"erreur");
+   ok.style.color="#22c55e";ok.textContent="Message envoyé. Merci, je vous répondrai rapidement.";
+   $("#fm").reset();$("#cnt").textContent="0 caractère";
+  }catch(err){
+   ok.style.color="#f0506e";ok.innerHTML=`L'envoi a échoué. Écrivez-moi directement : <a href="mailto:${PROFILE.email}">${PROFILE.email}</a>`;
+  }
+  btn.disabled=false};
 }
 
 /* ===== PIED DE PAGE (affiché sur toutes les pages) ===== */
