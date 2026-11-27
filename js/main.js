@@ -142,7 +142,9 @@ a.cc:hover{border-color:var(--acc)}
    ok.style.color="#22c55e";ok.textContent="Message envoyé. Merci, je vous répondrai rapidement.";
    $("#fm").reset();$("#cnt").textContent="0 caractère";
   }catch(err){
-   ok.style.color="#f0506e";ok.innerHTML=`L'envoi a échoué. Écrivez-moi directement : <a href="mailto:${PROFILE.email}">${PROFILE.email}</a>`;
+   const su=encodeURIComponent($("#fs").value||"Contact depuis le portfolio"),bo=encodeURIComponent($("#fmsg").value+"\n\n"+($("#fn").value||"")+"\n"+$("#fe").value);
+   ok.style.color="#f0506e";ok.innerHTML=`L'envoi a échoué. Vous pouvez m'écrire directement : <a href="https://mail.google.com/mail/?view=cm&fs=1&to=${PROFILE.email}&su=${su}&body=${bo}" target="_blank" rel="noopener">ouvrir Gmail avec votre message</a> ou <a href="mailto:${PROFILE.email}">${PROFILE.email}</a>.<br><small id="fmerr" style="color:var(--mute)"></small>`;
+   $("#fmerr").textContent="Détail technique : "+(err&&err.message?err.message:"connexion impossible");
   }
   btn.disabled=false};
 }
